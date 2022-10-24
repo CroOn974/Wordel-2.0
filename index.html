@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="liste.js"></script>
+    <script src="script.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+    <script src="ai.js"></script>
+    <title>Wordle</title>
+</head>
+<body id="jeu">
+    <!--menu-->
+    <header>
+        <nav class="navbar" id="navigation"> 
+            <section>
+                <button class="btn"><i class="bi bi-archive-fill"></i></button>
+                <button class="btn" data-bs-toggle="modal" data-bs-target="#modal_stat"><i class="bi bi-bar-chart-fill"></i></button>
+            </section>
+            <section id="titre">
+                <div class="titre_jeu correcte">L</div>
+                <div class="titre_jeu">E</div>
+                <div class="titre_jeu existe">M</div>
+                <div class="titre_jeu">O</div>
+                <div class="titre_jeu">T</div>
+            </section>
+            <section>
+                <button class="btn" onclick="init()"><i class="bi bi-question-lg"></i></button>
+                <button class="btn" onclick="foto()"><i class="bi bi-gear-fill"></i></button>
+            </section>
+        </nav>
+    </header>
+    <main>
+        <!--liste de mots-->
+        <section class="liste_mot">
+            <article class="mot" id="mot_1">
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+            </article>
+            <article class="mot" id="mot_2">
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+                <div class="lettre"></div> 
+            </article>
+            <article class="mot" id="mot_3">
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+                <div class="lettre"></div> 
+            </article>
+            <article class="mot" id="mot_4">
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+                <div class="lettre"></div> 
+            </article>
+            <article class="mot" id="mot_5">
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+                <div class="lettre"></div>
+                <div class="lettre"></div> 
+            </article>
+        </section>
+        <!--WEBCAM-->
+        <section id="webcam-container">
+            
+        </section>
+        <!--MODAL-->
+        <div class="modal fade" id="modal_stat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Statistique</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!--haut du modal de statistique-->
+                  <section  id="stat_top">
+                    <article class="stat_box">
+                        <p class="stat_num">1</p>
+                        <p class="stat_lettre">Parties</p>
+                    </article>
+                    <article class="stat_box">
+                        <p class="stat_num">100</p>
+                        <p class="stat_lettre">Victoire(%)</p>
+                    </article>
+                    <article class="stat_box">
+                        <p class="stat_num">1</p>
+                        <p class="stat_lettre">Série actuel</p>
+                    </article>
+                    <article class="stat_box">
+                        <p class="stat_num">1</p>
+                        <p class="stat_lettre">Meilleur série</p>
+                    </article>
+                  </section>
+                    <!--bas du modal de statistique-->
+                  <section id="stat_bot">
+                    <h5>Performances</h5>
+                    <article class="stat_tenta">
+                        <p>1</p>
+                        <div class="barre_pro" style="width: 100%;"></div>
+                    </article>
+                    <article>
+                        <p>2</p>
+                        <div></div>
+                    </article>
+                    <article>
+                        <p>3</p>
+                        <div></div>
+                    </article>
+                    <article>
+                        <p>4</p>
+                        <div></div>
+                    </article>
+                    <article>
+                        <p>5</p>
+                        <div></div>
+                    </article>
+                    <article>
+                        <p>6</p>
+                        <div></div>
+                    </article>
+                    <article>
+                        <p></p>
+                        <div></div>
+                    </article>
+                  </section>
+                </div>
+                <section id = resultat>
+
+                </section>
+                <div class="modal-footer" id = "resultat">
+                 
+                </div>
+              </div>
+            </div>
+        </div>
+
+    </main>    
+</body>
+</html>
